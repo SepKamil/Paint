@@ -19,7 +19,8 @@ import javax.swing.*;
 public class Panel extends JPanel implements MouseListener, MouseMotionListener {
     private int x=-1;
     private int y=-1;
-
+    private int x0 = -1;
+    private int y0 = -1;
 
     public Panel() {
         addMouseListener(this);
@@ -34,6 +35,8 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     public void mousePressed(MouseEvent e) {
+        x0 = e.getX();
+        y0 = e.getY();
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -49,20 +52,20 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener 
         g.clearRect(0, 0, getSize().width, getSize().height);
         g.setColor(Color.RED);
         if (x != -1 && y != -1) {
-            g.drawOval(x - 25, y - 25, 50, 50);
+            g.drawLine(x0, y0, x, y);
         }
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        x = e.getX();
+        y = e.getY();
+        repaint();
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        x = e.getX();
-        y = e.getY();
-        repaint();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
